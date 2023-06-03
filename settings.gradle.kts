@@ -1,0 +1,1 @@
+rootProject.name = "dev.cisnux.mentoring-app"
