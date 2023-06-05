@@ -8,10 +8,10 @@ import io.ktor.server.routing.*
 import xyz.cisnux.mentoring.www.controllers.CloudMessagingController
 import xyz.cisnux.mentoring.www.models.AddMessagingToken
 
-fun Route.postDeviceToken(cloudMessagingController: CloudMessagingController) {
-    post("/cloudMessaging") {
+fun Route.putDeviceToken(cloudMessagingController: CloudMessagingController) {
+    put("/cloudMessaging") {
         val addMessagingToken = call.receive<AddMessagingToken>()
-        cloudMessagingController.postToken(addMessagingToken)
+        cloudMessagingController.putToken(addMessagingToken)
         call.respondText("token stored correctly", status = HttpStatusCode.Created)
     }
 }

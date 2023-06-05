@@ -7,6 +7,6 @@ import xyz.cisnux.mentoring.www.models.toCloudMessagingToken
 class CloudMessagingController(
     private val cloudMessagingDataSource: CloudMessagingDataSource
 ) {
-    suspend fun postToken(addMessagingToken: AddMessagingToken): String? =
-        cloudMessagingDataSource.insertMessagingToken(addMessagingToken.toCloudMessagingToken())
+    suspend fun putToken(addMessagingToken: AddMessagingToken): String? =
+        cloudMessagingDataSource.upsertMessagingToken(addMessagingToken.toCloudMessagingToken())
 }

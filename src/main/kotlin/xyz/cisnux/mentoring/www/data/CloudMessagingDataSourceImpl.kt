@@ -11,7 +11,7 @@ import xyz.cisnux.mentoring.www.data.collections.CloudMessaging
 class CloudMessagingDataSourceImpl(
     private val db: CoroutineDatabase
 ) : CloudMessagingDataSource {
-    override suspend fun insertMessagingToken(cloudMessaging: CloudMessaging): String? =
+    override suspend fun upsertMessagingToken(cloudMessaging: CloudMessaging): String? =
         withContext(Dispatchers.IO) {
             db.getCollection<CloudMessaging>(CLOUD_MESSAGING)
                 .updateOne(
