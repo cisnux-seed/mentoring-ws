@@ -7,7 +7,7 @@ import io.ktor.server.websocket.*
 import io.ktor.websocket.*
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.serialization.json.Json
-import xyz.cisnux.mentoring.www.controllers.AlreadyConnectionException
+import xyz.cisnux.mentoring.www.utils.AlreadyConnectionException
 import xyz.cisnux.mentoring.www.controllers.MentoringController
 import xyz.cisnux.mentoring.www.models.AddMentoringSession
 

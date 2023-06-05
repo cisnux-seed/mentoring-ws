@@ -1,11 +1,11 @@
 package xyz.cisnux.mentoring.www.data
 
-import xyz.cisnux.mentoring.www.data.entities.MentoringSessionEntity
-import xyz.cisnux.mentoring.www.data.entities.NotCompleteMentoring
+import xyz.cisnux.mentoring.www.data.collections.DetailMentoringSession
+import xyz.cisnux.mentoring.www.data.collections.Mentoring
 
 interface MentoringDataSource {
-    suspend fun insertMentoring(mentoring: MentoringSessionEntity)
-    suspend fun updateMentoring(mentoring: MentoringSessionEntity)
-    suspend fun getAllMentoringById(userId: String): List<NotCompleteMentoring>
-    suspend fun getMentoringById(id: String): MentoringSessionEntity?
+    suspend fun insertMentoringSession(mentoring: DetailMentoringSession): String?
+    suspend fun updateMentoringSession(mentoring: DetailMentoringSession): String?
+    suspend fun findAllMentoringSessionsById(userId: String): List<Mentoring>
+    suspend fun findDetailMentoringSessionById(id: String): DetailMentoringSession?
 }

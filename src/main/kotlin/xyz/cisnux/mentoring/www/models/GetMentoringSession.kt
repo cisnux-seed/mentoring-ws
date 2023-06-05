@@ -8,6 +8,5 @@ data class GetMentoringSession(
     val title: String,
     val description: String,
     val isOnlyChat: Boolean,
-    val mentoringDate: Long,
-    val mentoringTime: Long
+    val eventTime: Long
 )
