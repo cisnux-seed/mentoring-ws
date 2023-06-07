@@ -1,10 +1,10 @@
 package xyz.cisnux.mentoring.www.utils
 
-import io.ktor.http.*
-import kotlinx.serialization.Serializable
+import java.util.*
 
-@Serializable
-data class Response<out T>(
-    val statusCode: Int,
-    val data: T
-)
+fun Long.addDuration(duration: Int): Long {
+    val calendar = Calendar.getInstance()
+    calendar.timeInMillis = this
+    calendar.add(Calendar.MINUTE, duration)
+    return calendar.time.time
+}

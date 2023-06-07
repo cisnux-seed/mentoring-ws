@@ -6,7 +6,7 @@ import xyz.cisnux.mentoring.www.models.GetChat
 
 @Serializable
 data class Chat(
-    val id: String = ObjectId().toString(),
+    val _id: String? = null,
     val roomChatId: String,
     val sender: String,
     val receiver: String,

@@ -5,7 +5,7 @@ import org.bson.types.ObjectId
 
 @Serializable
 data class CloudMessaging(
-    val id: String = ObjectId().toString(),
+    val _id: String? = null,
     val userId: String,
     val deviceToken: String
 )

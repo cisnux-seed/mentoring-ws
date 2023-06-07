@@ -40,6 +40,12 @@ dependencies {
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 
+    implementation("com.google.oauth-client:google-oauth-client:1.34.1")
+    implementation("com.google.auth:google-auth-library-oauth2-http:1.2.0")
+    implementation("com.google.apis:google-api-services-calendar:v3-rev20220715-2.0.0")
+    implementation("com.google.http-client:google-http-client-jackson2:1.43.2")
+    implementation("com.google.oauth-client:google-oauth-client-jetty:1.34.1")
+
     // KMongo
     implementation("org.litote.kmongo:kmongo:$kmongo_version")
     implementation("org.litote.kmongo:kmongo-coroutine:$kmongo_version")

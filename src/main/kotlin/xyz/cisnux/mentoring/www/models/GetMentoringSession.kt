@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class GetMentoringSession(
-    val id: String,
+    val id: String?,
     val title: String,
     val description: String,
     val isOnlyChat: Boolean,

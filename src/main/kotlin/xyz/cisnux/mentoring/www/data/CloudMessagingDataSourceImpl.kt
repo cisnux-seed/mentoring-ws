@@ -13,12 +13,13 @@ class CloudMessagingDataSourceImpl(
 ) : CloudMessagingDataSource {
     override suspend fun upsertMessagingToken(cloudMessaging: CloudMessaging): String? =
         withContext(Dispatchers.IO) {
-            db.getCollection<CloudMessaging>(CLOUD_MESSAGING)
-                .updateOne(
-                    CloudMessaging::userId eq cloudMessaging.userId, cloudMessaging,
-                    UpdateOptions().upsert(true)
-                )
-                .upsertedId?.toString()
+            cloudMessaging.apply {
+                db.getCollection<CloudMessaging>(CLOUD_MESSAGING)
+                    .updateOne(
+                        CloudMessaging::userId eq cloudMessaging.userId, cloudMessaging,
+                        UpdateOptions().upsert(true)
+                    )
+            }._id
         }
 
     override suspend fun findCloudMessagingById(userId: String): CloudMessaging? =

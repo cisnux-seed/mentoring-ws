@@ -4,22 +4,28 @@ import io.ktor.websocket.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import xyz.cisnux.mentoring.www.data.CloudMessagingDataSource
+import xyz.cisnux.mentoring.www.data.MenteeDataSource
 import xyz.cisnux.mentoring.www.data.MentoringDataSource
+import xyz.cisnux.mentoring.www.data.RoomChatDataSource
+import xyz.cisnux.mentoring.www.data.collections.RoomChat
 import xyz.cisnux.mentoring.www.data.collections.toGetMentoringSession
-import xyz.cisnux.mentoring.www.models.AddMentoringSession
-import xyz.cisnux.mentoring.www.models.toMentoringSession
+import xyz.cisnux.mentoring.www.models.*
 import xyz.cisnux.mentoring.www.services.FirebaseCloudMessaging
+import xyz.cisnux.mentoring.www.services.GoogleCalenderApiService
 import xyz.cisnux.mentoring.www.utils.AlreadyConnectionException
+import java.net.http.WebSocket
+import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
 class MentoringController(
     private val mentoringDataSource: MentoringDataSource,
     private val cloudMessagingDataSource: CloudMessagingDataSource,
-    private val firebaseCloudMessaging: FirebaseCloudMessaging
+    private val menteeDataSource: MenteeDataSource,
+    private val firebaseCloudMessaging: FirebaseCloudMessaging,
 ) {
     private val userSockets = ConcurrentHashMap<String, WebSocketSession>()
 
-    suspend fun onSubscribe(userId: String, socket: WebSocketSession) {
+    suspend fun onSubscribeMentoring(userId: String, socket: WebSocketSession) {
         if (userSockets.containsKey(userId)) {
             throw AlreadyConnectionException("connection already exist")
         }
@@ -36,15 +42,7 @@ class MentoringController(
         val mentoringEntity = addMentoringSession.toMentoringSession()
         val mentoringId = mentoringDataSource.insertMentoringSession(mentoringEntity)
         val deviceToken = cloudMessagingDataSource.findCloudMessagingById(addMentoringSession.mentorId)?.deviceToken
-        if (mentoringId != null && deviceToken != null) {
-            firebaseCloudMessaging.sendMentoringNotification(
-                mentoringId = mentoringId,
-                title = addMentoringSession.title,
-                description = addMentoringSession.description,
-                deviceToken = deviceToken
-            )
-        }
-
+        val mentee = menteeDataSource.findMenteeById(addMentoringSession.menteeId)
         val allMentoringForMentee = mentoringDataSource.findAllMentoringSessionsById(addMentoringSession.menteeId)
             .map {
                 it.toGetMentoringSession()
@@ -58,12 +56,21 @@ class MentoringController(
 
         userSockets[addMentoringSession.menteeId]?.send(Frame.Text(decodedAllMentoringForMentee))
         userSockets[addMentoringSession.mentorId]?.send(Frame.Text(decodedAllMentoringForMentor))
-    }
 
-    // this feature not implemented yet
-    suspend fun onUpdateMentoringSession(addMentoringSession: AddMentoringSession) {
+        if (mentoringId != null && deviceToken != null && mentee != null) {
+            val mentoringNotificationContent = MentoringNotificationContent(
+                mentoringId = mentoringId,
+                fullName = mentee.fullName,
+                title = addMentoringSession.title,
+                description = addMentoringSession.description,
+                photoProfile = mentee.photoProfile,
+                deviceToken = deviceToken,
+            )
+            firebaseCloudMessaging.sendMentoringNotification(
+                mentoringNotificationContent
+            )
+        }
     }
-
     fun tryDisconnect(userId: String) {
         userSockets[userId]
         if (userSockets.containsKey(userId)) {
