@@ -3,6 +3,7 @@ package xyz.cisnux.mentoring.www.data
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.litote.kmongo.coroutine.CoroutineDatabase
+import org.litote.kmongo.descending
 import org.litote.kmongo.eq
 import xyz.cisnux.mentoring.www.data.collections.Chat
 
@@ -13,8 +14,9 @@ class ChatDataSourceImpl(
         db.getCollection<Chat>(CHAT).insertOne(chat)
     }
 
-    override suspend fun findAllChatMessagesById(roomChatId: String): List<Chat> = withContext(Dispatchers.IO){
-        db.getCollection<Chat>(CHAT).find(Chat::roomChatId eq roomChatId).toList()
+    override suspend fun findAllChatMessagesById(roomChatId: String): List<Chat> = withContext(Dispatchers.IO) {
+        db.getCollection<Chat>(CHAT).find(Chat::roomChatId eq roomChatId)
+            .sort(descending(Chat::createdAt)).toList()
     }
 
     companion object {

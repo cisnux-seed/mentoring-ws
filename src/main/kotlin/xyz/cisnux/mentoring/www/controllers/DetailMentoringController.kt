@@ -28,9 +28,11 @@ class DetailMentoringController(
     private val detailMentoringSockets = ConcurrentHashMap<String, WebSocketSession>()
 
     suspend fun onSubscribeDetailMentoring(userId: String, mentoringId: String, socket: WebSocketSession) {
+        if (detailMentoringSockets.containsKey(userId)) {
+            throw AlreadyConnectionException("connection already exist")
+        }
         detailMentoringSockets[userId] = socket
         val detailMentoring = mentoringDataSource.findDetailMentoringSessionById(mentoringId)
-        println("detailMentoring: $detailMentoring")
         detailMentoring?.let {
             val mentee = menteeDataSource.findMenteeById(detailMentoring.menteeId)
             val mentor = menteeDataSource.findMenteeById(detailMentoring.mentorId)

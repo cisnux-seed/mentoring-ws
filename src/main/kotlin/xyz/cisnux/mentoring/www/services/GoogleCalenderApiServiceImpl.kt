@@ -37,9 +37,6 @@ class GoogleCalenderApiServiceImpl(
             .setTimeZone("Asia/Jakarta")
         event.end = end
 
-        val recurrence = arrayListOf("RRULE:FREQ=DAILY")
-        event.recurrence = recurrence
-
         val attendees: ArrayList<EventAttendee> = arrayListOf(
             EventAttendee().setEmail(menteeEmail),
             EventAttendee().setEmail(mentorEmail)
@@ -66,9 +63,11 @@ class GoogleCalenderApiServiceImpl(
 
         val linkMeet = try {
             val result = calendarService.events().insert(calendarId, event)
+                .setKey("AIzaSyAx_02w9aCYWbhh-45a2xbyianDJ00eF_g")
                 .setSendNotifications(true)
                 .setConferenceDataVersion(1)
                 .execute()
+            println("calendar: ${result?.conferenceData?.entryPoints}")
             result?.conferenceData?.entryPoints?.first()?.let {
                 it["uri"].toString()
             }

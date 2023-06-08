@@ -1,15 +1,10 @@
 package xyz.cisnux.mentoring.www.data
 
 import kotlinx.coroutines.*
+import org.litote.kmongo.*
 import org.litote.kmongo.coroutine.CoroutineDatabase
-import org.litote.kmongo.eq
-import org.litote.kmongo.gt
-import org.litote.kmongo.or
-import org.litote.kmongo.setValue
 import xyz.cisnux.mentoring.www.data.collections.DetailMentoringSession
 import xyz.cisnux.mentoring.www.data.collections.Mentoring
-import xyz.cisnux.mentoring.www.models.AcceptMentoring
-import xyz.cisnux.mentoring.www.models.CompleteMentoring
 
 class MentoringDataSourceImpl(
     private val db: CoroutineDatabase
@@ -50,6 +45,7 @@ class MentoringDataSourceImpl(
                     Mentoring::isOnlyChat,
                     Mentoring::eventTime,
                 )
+                .sort(descending(Mentoring::eventTime))
                 .toList()
         }
 

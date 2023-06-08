@@ -6,15 +6,10 @@ import kotlinx.serialization.json.Json
 import xyz.cisnux.mentoring.www.data.CloudMessagingDataSource
 import xyz.cisnux.mentoring.www.data.MenteeDataSource
 import xyz.cisnux.mentoring.www.data.MentoringDataSource
-import xyz.cisnux.mentoring.www.data.RoomChatDataSource
-import xyz.cisnux.mentoring.www.data.collections.RoomChat
 import xyz.cisnux.mentoring.www.data.collections.toGetMentoringSession
 import xyz.cisnux.mentoring.www.models.*
 import xyz.cisnux.mentoring.www.services.FirebaseCloudMessaging
-import xyz.cisnux.mentoring.www.services.GoogleCalenderApiService
 import xyz.cisnux.mentoring.www.utils.AlreadyConnectionException
-import java.net.http.WebSocket
-import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
 class MentoringController(

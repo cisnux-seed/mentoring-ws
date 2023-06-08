@@ -1,8 +1,6 @@
 package xyz.cisnux.mentoring.www.services
 
-import xyz.cisnux.mentoring.www.models.AddChat
-import xyz.cisnux.mentoring.www.models.GetChat
-import xyz.cisnux.mentoring.www.models.GetMentoringSession
+import xyz.cisnux.mentoring.www.models.ChatNotificationContent
 import xyz.cisnux.mentoring.www.models.MentoringNotificationContent
 
 interface FirebaseCloudMessaging {
@@ -11,7 +9,6 @@ interface FirebaseCloudMessaging {
     )
 
     suspend fun sendChatNotification(
-        addChat: AddChat,
-        deviceToken: String
+        chatNotificationContent: ChatNotificationContent
     )
 }

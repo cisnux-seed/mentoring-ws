@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "dicoding-mentoring",
+  "private_key_id": "8890bd162e01e061518d8f485840d2cc4e24bef0",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCwyxCSy+rsEKZ9\n1dn8mnnNRkEYGV139s3HkRq5QOCyhtlsMtiiFOyVhbAvkIsUsatQBegFWBg7ztuA\nkHg1WfN0JWy+Hjd+df8yFGXTIiot/PES5k1l8r7GLQGKK/jVB/jPsmEYRwCKP/zB\n8eDQrHzPfyOd9cnZ2u6zFJ7QEttugmyOG6pYUn8WPz/6cPsLglojAUMMr/4VDiR0\n8G2msa7BZFewa2JeipPqTrDsfUyVimjtwIwpY/wMO1wU2zoQGrox81gq4u7Ft+Is\nSZQppu5ntx/PNZ6sEttHnOXLT/5X1ylDLQTysl04J8YtcwZH1hsVVHowHzkVLOUo\ncbzl2wOFAgMBAAECggEAJRaMhQczYs+BZe+ZeeUcPUSKPlh/471KYR3fOdLS8JDa\nhtjJ2oLCOQHhOrE7hB1bn3+Fs61N9CoKoVdtaF/U814wiFfFc4mkfiiKTfciWyBv\noHPg88yvWdqyMn7UBjjUaRn2RYYLpnUS/MrVy2EME+mLmsUn0cScg8QFJwh1sSJg\nm1ScSnCSxIW2XIh++3PudTR9uwY/u74DbY0NfArTCf8Q1gNvtNUX5Sy7wFHSGGut\nvidnX9T36GP/Mw8hgvptHcPEbRcadE1oe7nnmDAaBqa2awgTUj/kHI1Mu/LryLBc\nnc5EdTGRa5qXQ3UD8V5+f1es4nQ7QStTds8J3Rcf4QKBgQDquw8WNU6sEDj7183C\niM4i0AuBP8Zrl+ZfAcF7nUOp0V1rQiCKaclnq/TEEr8wnKV+U+NI7pTbJKsx8Oob\nyKjfGkU6Fz0KcqaZbJ4VyKRJCobWWL59fcBNE+iHsF+wdgGjiCJ4uHLCSqW8nG/p\nNxSGVFibEfq//mzgU8RURcGrsQKBgQDA0A55xQXLUB+9ow31+OD2Tx2pTiV3+U9y\noqWL1ojzsHcJ+sk+KEyPO6Fc7xbfl3o6llekuIRfi6o0C5lehEv4o6QiLQR7U6zc\nK/eWqHFxCVi/VV438CeqmU6yJvlIva4ijAScwPJURSmTQLKvdbAu1tJ5ftqL/+IJ\nF6BVhyhOFQKBgQC5gSWWJoDLKHLwTQdWkyldh89f0Nft1fkA4nFXUNzVixlqF7OB\nz8KUxOfGQQ6Jy3JamM9JpwtK+Pq2mC9bz8PttWQ6WX0rEZqqK5Xvn0Z+Vuxi33WD\n1WqxP2eIPJIS8d+vrnmXsCU5eSbsHTGwPJBi7KutuZLSQq8mxeylsQ8ysQKBgQCZ\neMIc8NNE2rj5FEF3iStfQugkLBys21f+sjG9Ff2aotqNqf3nKOKPm/I76980B/l1\nitemOGy9NIk8tgLU9c8W0QJDZbvMgnT0J1cCp37sb3khiszdD54zL6YxLc58tOZX\nf0Xok7gPlaGbIQNZn/6lub58kJlamEmN3S11BojxZQKBgQDFtqpr1A7RFdtWnL4Q\nERj+TqOtvrIM+8gVIIxZuzYzez+Uo2LI8nFPNL0anVfcDPuwclesWfABceDG3/og\nn9tJd3YZtpXaut60RwpPoa+ewczy0Tk5bjOYf1LZ4XSBiSaIjy4rTiqXfNIcZZFV\n98f9i6faBzc/SNlGrOtTLOjhPw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "dicoding-api@dicoding-mentoring.iam.gserviceaccount.com",
+  "client_id": "100611358762647342711",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dicoding-api%40dicoding-mentoring.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
