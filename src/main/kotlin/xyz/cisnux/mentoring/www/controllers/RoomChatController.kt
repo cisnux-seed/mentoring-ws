@@ -33,17 +33,21 @@ class RoomChatController(
         val room = roomChatDataSource.findRoomById(roomChatId)
         val chats = chatDataSource.findAllChatMessagesById(roomChatId)
         room?.let {
-            val getRoomMessages = GetRoomMessages(
-                roomChatId = room._id!!,
-                mentorId = room.mentorId,
-                menteeId = room.menteeId,
-                endOfChatting = room.endOfChatting,
-                chats = chats.map {
-                    it.toGetChat()
-                }
-            )
-            val encodedRoomMessages = Json.encodeToString(getRoomMessages)
-            roomSockets[userId]?.send(Frame.Text(encodedRoomMessages))
+            val mentee = menteeDataSource.findMenteeById(room.menteeId)
+            val mentor = menteeDataSource.findMenteeById(room.mentorId)
+            if (mentee != null && mentor != null) {
+                val getRoomMessages = GetRoomMessages(
+                    roomChatId = room._id!!,
+                    mentee = mentee,
+                    mentor = mentor,
+                    endOfChatting = room.endOfChatting,
+                    chats = chats.map {
+                        it.toGetChat()
+                    }
+                )
+                val encodedRoomMessages = Json.encodeToString(getRoomMessages)
+                roomSockets[userId]?.send(Frame.Text(encodedRoomMessages))
+            }
         }
     }
 
@@ -51,21 +55,26 @@ class RoomChatController(
         chatDataSource.insertChatMessage(addChat.toChat())
         val room = roomChatDataSource.findRoomById(addChat.roomChatId)
         val chats = chatDataSource.findAllChatMessagesById(addChat.roomChatId)
-        if (room != null) {
-            val getRoomMessages = GetRoomMessages(
-                roomChatId = room._id!!,
-                mentorId = room.mentorId,
-                menteeId = room.menteeId,
-                endOfChatting = room.endOfChatting,
-                chats = chats.map {
-                    it.toGetChat()
-                }
-            )
+        room?.let {
+            val mentee = menteeDataSource.findMenteeById(room.menteeId)
+            val mentor = menteeDataSource.findMenteeById(room.mentorId)
+            if (mentee != null && mentor != null){
+                val getRoomMessages = GetRoomMessages(
+                    roomChatId = room._id!!,
+                    mentee = mentee,
+                    mentor = mentor,
+                    endOfChatting = room.endOfChatting,
+                    chats = chats.map {
+                        it.toGetChat()
+                    }
+                )
+                val encodedRoomMessages = Json.encodeToString(getRoomMessages)
+                roomSockets[addChat.senderId]?.send(Frame.Text(encodedRoomMessages))
+                roomSockets[addChat.receiverId]?.send(Frame.Text(encodedRoomMessages))
+            }
+
             val receiver = menteeDataSource.findMenteeById(addChat.receiverId)
             val deviceToken = cloudMessagingDataSource.findCloudMessagingById(addChat.receiverId)?.deviceToken
-            val encodedRoomMessages = Json.encodeToString(getRoomMessages)
-            roomSockets[addChat.senderId]?.send(Frame.Text(encodedRoomMessages))
-            roomSockets[addChat.receiverId]?.send(Frame.Text(encodedRoomMessages))
             if (receiver != null && deviceToken != null) {
                 val chatNotificationContent = ChatNotificationContent(
                     roomChatId = addChat.roomChatId,

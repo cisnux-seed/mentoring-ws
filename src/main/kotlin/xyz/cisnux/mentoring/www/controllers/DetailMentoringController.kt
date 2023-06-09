@@ -64,7 +64,7 @@ class DetailMentoringController(
         detailMentoring?.let {
             val mentee = menteeDataSource.findMenteeById(detailMentoring.menteeId)
             val mentor = menteeDataSource.findMenteeById(detailMentoring.mentorId)
-            val deviceToken = cloudMessagingDataSource.findCloudMessagingById(detailMentoring.mentorId)?.deviceToken
+            val deviceToken = cloudMessagingDataSource.findCloudMessagingById(detailMentoring.menteeId)?.deviceToken
 
             if (mentee != null && mentor != null) {
                 val endOfMentoring = detailMentoring.eventTime.addDuration(acceptedMentoring.duration)
